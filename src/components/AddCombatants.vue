@@ -43,7 +43,7 @@ export default {
         health: e.target[1].value,
         armor: e.target[2].value,
       };
-
+      //poggers test
       console.log(newCombatant);
       this.appendCombatant(newCombatant);
     },
