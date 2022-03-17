@@ -14,6 +14,14 @@
           Armor Class:
           <input type="number" />
         </label>
+        <label>
+          Initiative Roll:
+          <input type="number" />
+        </label>
+        <label>
+          Dex Mod:
+          <input type="number" />
+        </label>
       </div>
       <input type="submit" value="Submit" />
     </form>
@@ -30,6 +38,7 @@ export default {
       name: "",
       health: 0,
       armor: 0,
+      mod: 0,
     };
   },
   methods: {
@@ -39,12 +48,13 @@ export default {
       console.log(e.target[0].value);
 
       let newCombatant = {
+        id: 1,
         name: e.target[0].value,
         health: e.target[1].value,
         armor: e.target[2].value,
+        roll: e.target[3].value,
+        mod: e.target[4].value,
       };
-      //poggers test
-      console.log(newCombatant);
       this.appendCombatant(newCombatant);
     },
   },

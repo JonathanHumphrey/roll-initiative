@@ -5,13 +5,13 @@ const state = {
 };
 
 const getters = {
-    
+    allCombatants: (state) => state.combatants
 };
 
 const actions = {
     async appendCombatant({ commit }, newCombatant) {
         //const res = await axios.post('http://localhost:5000///combatants', newCombatant)
-        console.log(newCombatant);
+        console.log(state);
         commit('addCombatant', newCombatant);
     }
 };
