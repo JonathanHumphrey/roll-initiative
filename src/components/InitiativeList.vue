@@ -13,7 +13,11 @@
           </tr>
         </thead>
         <tbody id="list">
-          <tr v-for="(item, i) in sortedList" v-bind:key="i" v-bind:id="i">
+          <tr
+            v-for="(item, i) in sortedList"
+            v-bind:key="i"
+            v-bind:id="`${i + 1}`"
+          >
             <th scope="row" id="index" value="i">{{ ++i }}</th>
             <td>{{ item.name }}</td>
             <td>{{ item.health }}</td>
@@ -34,24 +38,30 @@ import { mapGetters, mapState, mapActions } from "vuex";
 export default {
   name: "InitiativeList",
   data() {
-    return {
-      list: document.getElementById("list"),
-    };
+    return {};
   },
   methods: {
     ...mapActions(["iterate"]),
-    nextCombatant(event) {
-      console.log(event);
-      if (currentElement) {
-        console.log("here");
-        currentElement.classList.remove("highlight");
-      }
-      // Need to figure out how to highlight the row of the next combatant in line, maybe make use of state?????
-      console.log(this.iterator);
-      let currentElement = document.getElementById(this.iterator);
-      currentElement.classList.add("highlight");
+    nextCombatant() {
+      let thing = document.getElementsByTagName("table");
+      console.log(thing);
+      let item = document.getElementsByTagName("tr")[this.iterator];
+      console.log(this.iterator, item.id);
 
-      console.log(currentElement);
+      if (item.id == this.iterator) {
+        console.log(item);
+        item.classList.add("highlight");
+      } else if (item.id !== this.iterator) {
+        console.log(item);
+        //item.classList.remove("highlight");
+      }
+      for (let i in thing) {
+        console.log(thing[i].id);
+        if (thing[i].id !== this.iterator) {
+          item.classList.remove("highlight");
+        }
+      }
+
       this.iterate(this.iterator);
 
       /*
@@ -64,6 +74,9 @@ export default {
     ...mapState({
       iterator: (state) => state.data.iterator,
     }),
+    /*
+      This function takes all combatants in the list and sorts based on the roll, if there is a tie then it sorts based off the dex mod stat for that combatant, higher of each comes out on top
+    */
     sortedList: function () {
       return this.allCombatants.slice().sort(function (a, b) {
         if (a.roll === b.roll) {

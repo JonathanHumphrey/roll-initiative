@@ -19,7 +19,7 @@ const state = {
             mod: 0
         }
     ],
-    iterator: 0, 
+    iterator: 1, 
 };
 
 const getters = {
@@ -35,8 +35,8 @@ const actions = {
     async iterate({ commit }, iterator) {
         console.log("length", state.combatants.length)
         if (iterator === state.combatants.length) {
-            console.log('here??')
-            iterator == 0;
+            
+            iterator = 1;
         }
         else {
             iterator++;
