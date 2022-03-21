@@ -53,6 +53,10 @@ export default {
 
       console.log(currentElement);
       this.iterate(this.iterator);
+
+      /*
+        okay, need to make something iterate every time the button is clicked, then it needs to highlight the correct row corresponding to the iterator, then it unhighlights while it is not being selected
+      */
     },
   },
   computed: {
