@@ -14,15 +14,15 @@
         </thead>
         <tbody id="list">
           <tr
-            v-for="(item, i) in sortedList"
+            v-for="(tableRow, i) in sortedList"
             v-bind:key="i"
             v-bind:id="`${i + 1}`"
           >
             <th scope="row" id="index" value="i">{{ ++i }}</th>
-            <td>{{ item.name }}</td>
-            <td>{{ item.health }}</td>
-            <td>{{ item.armor }}</td>
-            <td>{{ item.roll }}</td>
+            <td>{{ tableRow.name }}</td>
+            <td>{{ tableRow.health }}</td>
+            <td>{{ tableRow.armor }}</td>
+            <td>{{ tableRow.roll }}</td>
             <td><input type="checkbox" name="Conentration" id="" /></td>
           </tr>
         </tbody>
@@ -42,31 +42,29 @@ export default {
   },
   methods: {
     ...mapActions(["iterate"]),
+    /*
+    FUNCTION: nextCombatant()
+      serves to keep track of the turn order, but making use of an iterator in state
+      the function checks to see if the iterator matches the ID value assigned to the row, then adds a highlight class to it, then removes the class of the previous row on execution of the function
+    */
     nextCombatant() {
-      let thing = document.getElementsByTagName("table");
-      console.log(thing);
-      let item = document.getElementsByTagName("tr")[this.iterator];
-      console.log(this.iterator, item.id);
+      let prevRow;
+      if (this.iterator !== 1) {
+        prevRow = document.getElementsByTagName("tr")[this.iterator - 1];
+      }
+      if (this.iterator === 1) {
+        prevRow =
+          document.getElementsByTagName("tr")[this.allCombatants.length];
+        prevRow.classList.remove("highlight");
+      }
 
-      if (item.id == this.iterator) {
-        console.log(item);
-        item.classList.add("highlight");
-      } else if (item.id !== this.iterator) {
-        console.log(item);
-        //item.classList.remove("highlight");
-      }
-      for (let i in thing) {
-        console.log(thing[i].id);
-        if (thing[i].id !== this.iterator) {
-          item.classList.remove("highlight");
-        }
-      }
+      let tableRow = document.getElementsByTagName("tr")[this.iterator];
+      tableRow.classList.add("highlight");
 
       this.iterate(this.iterator);
-
-      /*
-        okay, need to make something iterate every time the button is clicked, then it needs to highlight the correct row corresponding to the iterator, then it unhighlights while it is not being selected
-      */
+      if (prevRow) {
+        prevRow.classList.remove("highlight");
+      }
     },
   },
   computed: {
@@ -75,6 +73,7 @@ export default {
       iterator: (state) => state.data.iterator,
     }),
     /*
+    FUNCTION: sortedList()
       This function takes all combatants in the list and sorts based on the roll, if there is a tie then it sorts based off the dex mod stat for that combatant, higher of each comes out on top
     */
     sortedList: function () {
@@ -99,7 +98,7 @@ export default {
   flex-direction: row;
 }
 .highlight {
-  background-color: green;
+  background-color: rgb(172, 243, 194);
 }
 h3 {
   margin: 2rem;
