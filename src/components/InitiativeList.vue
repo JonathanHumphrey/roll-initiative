@@ -10,6 +10,8 @@
             <th scope="col">Armor</th>
             <th scope="col">Roll</th>
             <th scope="col">Concentration</th>
+            <th scope="col">Current Status Effects</th>
+            <th scope="col">Add Status Effects</th>
           </tr>
         </thead>
         <tbody id="list">
@@ -24,6 +26,30 @@
             <td>{{ tableRow.armor }}</td>
             <td>{{ tableRow.roll }}</td>
             <td><input type="checkbox" name="Conentration" id="" /></td>
+            <td>{{ tableRow.status[i] }}</td>
+            <td>
+              <select name="status" id="status">
+                <option value="Blinded">Blinded</option>
+                <option value="Charmed">Charmed</option>
+                <option value="Deafened">Defeaned</option>
+                <option value="Frightened">Frightened</option>
+                <option value="Grappled">Grappled</option>
+                <option value="Incapacitated">Incapacitated</option>
+                <option value="Invisible">Invisible</option>
+                <option value="Paralyzed">Paralyzed</option>
+                <option value="Petrified">Petrified</option>
+                <option value="Poisoned">Poisoned</option>
+                <option value="Prone">Prone</option>
+                <option value="Restrained">Restrained</option>
+                <option value="Stunned">Stunned</option>
+                <option value="Unconsious">Unconsious</option>
+              </select>
+              <input
+                type="button"
+                value="Add"
+                @click="addStatusEffect($event)"
+              />
+            </td>
           </tr>
         </tbody>
       </table>
@@ -42,6 +68,10 @@ export default {
   },
   methods: {
     ...mapActions(["iterate"]),
+    addStatusEffect(event) {
+      console.log(event);
+      console.log(document.getElementById("status").value);
+    },
     /*
     FUNCTION: nextCombatant()
       serves to keep track of the turn order, but making use of an iterator in state

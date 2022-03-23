@@ -9,14 +9,16 @@ const state = {
             health: 1,
             armor: 1,
             roll: 2,
-            mod: 0
+            mod: 0,
+            status: ["blinded"]
         },
         {
             name: 'jam',
             health: 1,
             armor: 1,
             roll: 1,
-            mod: 0
+            mod: 0, 
+            status: []
         }
     ],
     iterator: 1, 
