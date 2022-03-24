@@ -45,12 +45,16 @@ const actions = {
         }
         console.log("current",iterator);
         commit('plusOne', iterator);
+    },
+    async addStatus(statusEffect) {
+        console.log("here", statusEffect);
     }
 };
 
 const mutations = {
     addCombatant: (state, newCombatant) => (state.combatants.unshift(newCombatant)),
-    plusOne: (state, iterator) => (state.iterator = iterator)
+    plusOne: (state, iterator) => (state.iterator = iterator),
+    //appendStatus: (state, statusEffect) => state.combatants
 };
 
 export default {

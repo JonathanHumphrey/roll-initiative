@@ -67,10 +67,13 @@ export default {
     return {};
   },
   methods: {
-    ...mapActions(["iterate"]),
+    ...mapActions(["iterate", "addStatus"]),
     addStatusEffect(event) {
       console.log(event);
-      console.log(document.getElementById("status").value);
+
+      let statusEffect = document.getElementById("status").value;
+      //console.log(status);
+      this.addStatus(statusEffect);
     },
     /*
     FUNCTION: nextCombatant()
