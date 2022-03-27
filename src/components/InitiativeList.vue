@@ -21,7 +21,7 @@
             v-bind:id="`${i + 1}`"
           >
             <th scope="row" id="index" value="i">{{ ++i }}</th>
-            <td>{{ tableRow.name }}</td>
+            <td id="combatantName">{{ tableRow.name }}</td>
             <td>{{ tableRow.health }}</td>
             <td>{{ tableRow.armor }}</td>
             <td>{{ tableRow.roll }}</td>
@@ -70,10 +70,15 @@ export default {
     ...mapActions(["iterate", "addStatus"]),
     addStatusEffect(event) {
       console.log(event);
-
-      let statusEffect = document.getElementById("status").value;
-      //console.log(status);
-      this.addStatus(statusEffect);
+      let combatant = document.getElementById("combatantName").innerHTML;
+      console.log(combatant);
+      let effect = document.getElementById("status").value;
+      console.log(effect);
+      let obj = {
+        effect: effect,
+        combatant: combatant,
+      };
+      this.addStatus(obj);
     },
     /*
     FUNCTION: nextCombatant()

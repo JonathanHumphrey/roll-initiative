@@ -10,7 +10,7 @@ const state = {
             armor: 1,
             roll: 2,
             mod: 0,
-            status: ["blinded"]
+            status: []
         },
         {
             name: 'jam',
@@ -46,15 +46,27 @@ const actions = {
         console.log("current",iterator);
         commit('plusOne', iterator);
     },
-    async addStatus(statusEffect) {
-        console.log("here", statusEffect);
+    async addStatus({ commit }, obj) {
+        console.log("here", obj);
+        commit('appendStatus', obj);
     }
 };
 
 const mutations = {
     addCombatant: (state, newCombatant) => (state.combatants.unshift(newCombatant)),
     plusOne: (state, iterator) => (state.iterator = iterator),
-    //appendStatus: (state, statusEffect) => state.combatants
+    appendStatus: (state, obj) => {
+        let arr;
+        
+        for (let item in state.combatants) {
+            console.log(state.combatants[item]);
+            if (state.combatants[item].name === obj.combatant) {
+                arr = state.combatants[item].status;
+            }
+        }
+        arr.unshift(obj.effect)
+        console.log(arr);
+    }
 };
 
 export default {
