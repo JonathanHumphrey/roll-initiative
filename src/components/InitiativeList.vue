@@ -79,6 +79,9 @@ export default {
         combatant: combatant,
       };
       this.addStatus(obj);
+      /* 
+        need to tie the status effect to the specific combatant, not entirely sure how to do this
+      */
     },
     /*
     FUNCTION: nextCombatant()
