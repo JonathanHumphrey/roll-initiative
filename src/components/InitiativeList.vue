@@ -81,6 +81,10 @@ export default {
       this.addStatus(obj);
       /* 
         need to tie the status effect to the specific combatant, not entirely sure how to do this
+
+        needs: append the status effect onto the status array in the combatant object
+
+        also need to render the status effects in a different way, maybe v-for through and make a new div each time it reads a value in the array with a button to delete the object in the array
       */
     },
     /*
