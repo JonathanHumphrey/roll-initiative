@@ -26,10 +26,13 @@
             <td>{{ tableRow.armor }}</td>
             <td>{{ tableRow.roll }}</td>
             <td><input type="checkbox" name="Conentration" id="" /></td>
-            <td>{{ tableRow.status[i] }}</td>
+            // eslint-disable-next-line vue/require-v-for-key
+            <td v-for="let j in tableRow.status" v-bind:key="j">
+              {{ tableRow.status[j] }}
+            </td>
             <td>
               <select name="status" id="status">
-                <option value="Blinded">Blinded</option>
+                <option type="text" value="Blinded">Blinded</option>
                 <option value="Charmed">Charmed</option>
                 <option value="Deafened">Defeaned</option>
                 <option value="Frightened">Frightened</option>
@@ -44,11 +47,7 @@
                 <option value="Stunned">Stunned</option>
                 <option value="Unconsious">Unconsious</option>
               </select>
-              <input
-                type="button"
-                value="Add"
-                @click="addStatusEffect($event)"
-              />
+              <input type="button" value="Add" @click="addStatusEffect()" />
             </td>
           </tr>
         </tbody>
@@ -68,12 +67,11 @@ export default {
   },
   methods: {
     ...mapActions(["iterate", "addStatus"]),
-    addStatusEffect(event) {
-      console.log(event);
+    addStatusEffect() {
       let combatant = document.getElementById("combatantName").innerHTML;
-      console.log(combatant);
+
       let effect = document.getElementById("status").value;
-      console.log(effect);
+
       let obj = {
         effect: effect,
         combatant: combatant,

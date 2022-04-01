@@ -10,7 +10,7 @@ const state = {
             armor: 1,
             roll: 2,
             mod: 0,
-            status: []
+            status: ["Blinded"]
         },
         {
             name: 'jam',
@@ -47,7 +47,6 @@ const actions = {
         commit('plusOne', iterator);
     },
     async addStatus({ commit }, obj) {
-        console.log("here", obj);
         commit('appendStatus', obj);
     }
 };
@@ -64,7 +63,17 @@ const mutations = {
                 arr = state.combatants[item].status;
             }
         }
-        arr.unshift(obj.effect)
+        for (let effect in arr) {
+            console.log(arr[effect]);
+            
+            if (arr[effect] == obj.status) {
+                alert(`'target already ${obj.status}'`)
+            } else {
+                console.log('??')
+                
+            }
+        }
+        arr.push(obj.effect)
         console.log(arr);
     }
 };
