@@ -10,7 +10,6 @@
             <th scope="col">Armor</th>
             <th scope="col">Roll</th>
             <th scope="col">Concentration</th>
-            <th scope="col">Current Status Effects</th>
             <th scope="col">Add Status Effects</th>
           </tr>
         </thead>
@@ -26,9 +25,6 @@
             <td>{{ tableRow.armor }}</td>
             <td>{{ tableRow.roll }}</td>
             <td><input type="checkbox" name="Conentration" id="" /></td>
-            <td v-for="j in tableRow.status" v-bind:key="j">
-              {{ tableRow.status[j] }}
-            </td>
             <td>
               <select name="status" id="status">
                 <option type="text" value="Blinded">Blinded</option>
@@ -53,11 +49,14 @@
       </table>
       <input type="button" value="next" @click="nextCombatant($event)" />
     </div>
+    <div class="status-effects" v-for="i in this.currentStatus" v-bind:key="i">
+      <p>{{ this.currentStatus[i] }}</p>
+    </div>
   </div>
 </template>
 
 <script>
-import { mapGetters, mapState, mapActions } from "vuex";
+import { mapGetters, mapState, mapMutations } from "vuex";
 
 export default {
   name: "InitiativeList",
@@ -65,7 +64,7 @@ export default {
     return {};
   },
   methods: {
-    ...mapActions(["iterate", "addStatus"]),
+    ...mapMutations(["iterate", "addStatus"]),
     addStatusEffect() {
       let combatant = document.getElementById("combatantName").innerHTML;
 
@@ -90,13 +89,15 @@ export default {
       the function checks to see if the iterator matches the ID value assigned to the row, then adds a highlight class to it, then removes the class of the previous row on execution of the function
     */
     nextCombatant() {
+      console.log(this.allCombatants[this.iterator - 1].status);
+      console.log(this.currentStatus[0]);
       let prevRow;
-      if (this.iterator !== 1) {
+      if (this.iterator === 0) {
+        console.log("empty");
+      } else if (this.iterator !== 1) {
         prevRow = document.getElementsByTagName("tr")[this.iterator - 1];
-      }
-      if (this.iterator === 1) {
-        prevRow =
-          document.getElementsByTagName("tr")[this.allCombatants.length];
+      } else if (this.iterator === 1) {
+        prevRow = document.getElementsByTagName("tr")[this.combatants.length];
         prevRow.classList.remove("highlight");
       }
 
@@ -110,9 +111,10 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(["allCombatants"]),
+    ...mapGetters(["allCombatants", "currentStatus"]),
     ...mapState({
       iterator: (state) => state.data.iterator,
+      combatants: (state) => state.data.combatants,
     }),
     /*
     FUNCTION: sortedList()

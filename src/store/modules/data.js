@@ -2,6 +2,7 @@
 
 
 
+
 const state = {
     combatants: [
         {
@@ -19,13 +20,22 @@ const state = {
             roll: 1,
             mod: 0, 
             status: []
+        },
+        {
+            name: 'jom',
+            health: 1,
+            armor: 1,
+            roll: 0,
+            mod: 0, 
+            status: []
         }
     ],
     iterator: 1, 
 };
 
 const getters = {
-    allCombatants: (state) => state.combatants
+    allCombatants: (state) => state.combatants,
+    currentStatus: (state) => state.combatants[state.iterator - 1].status
 };
 
 const actions = {
@@ -34,7 +44,7 @@ const actions = {
         console.log(state);
         commit('addCombatant', newCombatant);
     },
-    async iterate({ commit }, iterator) {
+    /* async iterate({ commit }, iterator) {
         console.log("length", state.combatants.length)
         if (iterator === state.combatants.length) {
             
@@ -45,16 +55,27 @@ const actions = {
         }
         console.log("current",iterator);
         commit('plusOne', iterator);
-    },
-    async addStatus({ commit }, obj) {
+    }, */
+    /* async addStatus({ commit }, obj) {
         commit('appendStatus', obj);
-    }
+    } */
 };
 
 const mutations = {
     addCombatant: (state, newCombatant) => (state.combatants.unshift(newCombatant)),
-    plusOne: (state, iterator) => (state.iterator = iterator),
-    appendStatus: (state, obj) => {
+    iterate(state, iterator) {
+        
+        
+        if (iterator === state.combatants.length) {
+            
+            state.iterator = 1;
+        }
+        else {
+            
+            state.iterator++;
+        }
+    }, 
+    addStatus: (state, obj) => {
         let arr;
         
         for (let item in state.combatants) {
@@ -66,7 +87,7 @@ const mutations = {
         for (let effect in arr) {
             console.log(arr[effect]);
             
-            if (arr[effect] == obj.status) {
+            if (arr[effect] === obj.status) {
                 alert(`'target already ${obj.status}'`)
             } else {
                 console.log('??')
