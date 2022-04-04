@@ -26,8 +26,7 @@
             <td>{{ tableRow.armor }}</td>
             <td>{{ tableRow.roll }}</td>
             <td><input type="checkbox" name="Conentration" id="" /></td>
-            // eslint-disable-next-line vue/require-v-for-key
-            <td v-for="let j in tableRow.status" v-bind:key="j">
+            <td v-for="j in tableRow.status" v-bind:key="j">
               {{ tableRow.status[j] }}
             </td>
             <td>
