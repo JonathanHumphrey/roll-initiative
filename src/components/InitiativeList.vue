@@ -25,30 +25,28 @@
             <td>{{ tableRow.armor }}</td>
             <td>{{ tableRow.roll }}</td>
             <td><input type="checkbox" name="Conentration" id="" /></td>
-            <td>
-              <select name="status" id="status">
-                <option type="text" value="Blinded">Blinded</option>
-                <option value="Charmed">Charmed</option>
-                <option value="Deafened">Defeaned</option>
-                <option value="Frightened">Frightened</option>
-                <option value="Grappled">Grappled</option>
-                <option value="Incapacitated">Incapacitated</option>
-                <option value="Invisible">Invisible</option>
-                <option value="Paralyzed">Paralyzed</option>
-                <option value="Petrified">Petrified</option>
-                <option value="Poisoned">Poisoned</option>
-                <option value="Prone">Prone</option>
-                <option value="Restrained">Restrained</option>
-                <option value="Stunned">Stunned</option>
-                <option value="Unconsious">Unconsious</option>
-              </select>
-              <input type="button" value="Add" @click="addStatusEffect()" />
-            </td>
           </tr>
         </tbody>
       </table>
       <input type="button" value="next" @click="nextCombatant($event)" />
     </div>
+    <select name="status" id="status">
+      <option type="text" value="Blinded">Blinded</option>
+      <option value="Charmed">Charmed</option>
+      <option value="Deafened">Defeaned</option>
+      <option value="Frightened">Frightened</option>
+      <option value="Grappled">Grappled</option>
+      <option value="Incapacitated">Incapacitated</option>
+      <option value="Invisible">Invisible</option>
+      <option value="Paralyzed">Paralyzed</option>
+      <option value="Petrified">Petrified</option>
+      <option value="Poisoned">Poisoned</option>
+      <option value="Prone">Prone</option>
+      <option value="Restrained">Restrained</option>
+      <option value="Stunned">Stunned</option>
+      <option value="Unconsious">Unconsious</option>
+    </select>
+    <input type="button" value="Add" @click="addStatusEffect()" />
     <div class="status-effects" v-for="i in this.currentStatus" v-bind:key="i">
       <p>{{ this.currentStatus[i] }}</p>
     </div>
@@ -66,13 +64,13 @@ export default {
   methods: {
     ...mapMutations(["iterate", "addStatus"]),
     addStatusEffect() {
-      let combatant = document.getElementById("combatantName").innerHTML;
+      console.log(this.currentFighter);
 
       let effect = document.getElementById("status").value;
-
+      this.currentFighter.status.unshift(effect);
       let obj = {
         effect: effect,
-        combatant: combatant,
+        combatant: this.currentFighter,
       };
       this.addStatus(obj);
       /* 
@@ -89,8 +87,6 @@ export default {
       the function checks to see if the iterator matches the ID value assigned to the row, then adds a highlight class to it, then removes the class of the previous row on execution of the function
     */
     nextCombatant() {
-      console.log(this.allCombatants[this.iterator - 1].status);
-      console.log(this.currentStatus[0]);
       let prevRow;
       if (this.iterator === 0) {
         console.log("empty");
@@ -111,7 +107,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(["allCombatants", "currentStatus"]),
+    ...mapGetters(["allCombatants", "currentFighter"]),
     ...mapState({
       iterator: (state) => state.data.iterator,
       combatants: (state) => state.data.combatants,

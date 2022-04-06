@@ -19,7 +19,7 @@ const state = {
             armor: 1,
             roll: 1,
             mod: 0, 
-            status: []
+            status: ["Deafened", "Charmed"]
         },
         {
             name: 'jom',
@@ -35,7 +35,7 @@ const state = {
 
 const getters = {
     allCombatants: (state) => state.combatants,
-    currentStatus: (state) => state.combatants[state.iterator - 1].status
+    currentFighter: (state) => state.combatants[state.iterator - 1]
 };
 
 const actions = {
@@ -76,26 +76,9 @@ const mutations = {
         }
     }, 
     addStatus: (state, obj) => {
-        let arr;
+        console.log(obj)
         
-        for (let item in state.combatants) {
-            console.log(state.combatants[item]);
-            if (state.combatants[item].name === obj.combatant) {
-                arr = state.combatants[item].status;
-            }
-        }
-        for (let effect in arr) {
-            console.log(arr[effect]);
-            
-            if (arr[effect] === obj.status) {
-                alert(`'target already ${obj.status}'`)
-            } else {
-                console.log('??')
-                
-            }
-        }
-        arr.push(obj.effect)
-        console.log(arr);
+        
     }
 };
 
