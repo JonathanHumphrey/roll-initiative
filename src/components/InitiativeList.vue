@@ -3,15 +3,12 @@
     <div class="fighters">
       <table>
         <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Name</th>
-            <th scope="col">Health</th>
-            <th scope="col">Armor</th>
-            <th scope="col">Roll</th>
-            <th scope="col">Concentration</th>
-            <th scope="col">Add Status Effects</th>
-          </tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Health</th>
+          <th scope="col">Armor</th>
+          <th scope="col">Roll</th>
+          <th scope="col">Concentration</th>
         </thead>
         <tbody id="list">
           <tr
@@ -47,9 +44,6 @@
       <option value="Unconsious">Unconsious</option>
     </select>
     <input type="button" value="Add" @click="addStatusEffect()" />
-    <div class="status-effects" v-for="i in this.currentStatus" v-bind:key="i">
-      <p>{{ this.currentStatus[i] }}</p>
-    </div>
   </div>
 </template>
 
@@ -88,18 +82,18 @@ export default {
     */
     nextCombatant() {
       let prevRow;
+
       if (this.iterator === 0) {
-        console.log("empty");
-      } else if (this.iterator !== 1) {
+        let tableRow = document.getElementsByTagName("tr")[this.iterator];
+        tableRow.classList.add("highlight");
+        prevRow =
+          document.getElementsByTagName("tr")[this.combatants.length - 1];
+      } else if (this.iterator !== 0) {
         prevRow = document.getElementsByTagName("tr")[this.iterator - 1];
-      } else if (this.iterator === 1) {
-        prevRow = document.getElementsByTagName("tr")[this.combatants.length];
-        prevRow.classList.remove("highlight");
+        let tableRow = document.getElementsByTagName("tr")[this.iterator];
+        tableRow.classList.add("highlight");
       }
-
-      let tableRow = document.getElementsByTagName("tr")[this.iterator];
-      tableRow.classList.add("highlight");
-
+      console.log(this.iterator);
       this.iterate(this.iterator);
       if (prevRow) {
         prevRow.classList.remove("highlight");

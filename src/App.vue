@@ -1,17 +1,20 @@
 <template>
   <AddCombatants />
   <InitiativeList />
+  <CurrentCombatant />
 </template>
 
 <script>
 import AddCombatants from "./components/AddCombatants.vue";
 import InitiativeList from "./components/InitiativeList.vue";
+import CurrentCombatant from "./components/CurrentCombatant.vue";
 
 export default {
   name: "App",
   components: {
     AddCombatants,
     InitiativeList,
+    CurrentCombatant,
   },
 };
 </script>
