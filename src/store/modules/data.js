@@ -35,7 +35,16 @@ const state = {
 
 const getters = {
     allCombatants: (state) => state.combatants,
-    currentFighter: (state) => state.combatants[state.iterator]
+    currentFighter(state, iterator) {
+        
+
+        if (iterator === (state.combatants.length - 1)) {
+            let index = state.combatants.length - 1;
+            return state.combatants[index];
+        } else {
+            return state.combatants[state.iterator - 1]
+        }
+    }
 };
 
 const actions = {
@@ -66,14 +75,16 @@ const mutations = {
     iterate(state, iterator) {
         
         
-        if (iterator === state.combatants.length - 1) {
+        if (iterator === state.combatants.length - 1 || iterator === -1) {
             
             state.iterator = 0;
         }
         else {
             
             state.iterator++;
+            
         }
+        console.log(state.combatants[iterator])
     }, 
     addStatus: (state, obj) => {
         console.log(obj)

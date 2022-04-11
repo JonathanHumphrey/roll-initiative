@@ -83,6 +83,10 @@ export default {
     nextCombatant() {
       let prevRow;
 
+      if (this.iterator === -1) {
+        console.log("poop");
+        this.iterate(this.iterator);
+      }
       if (this.iterator === 0) {
         let tableRow = document.getElementsByTagName("tr")[this.iterator];
         tableRow.classList.add("highlight");
