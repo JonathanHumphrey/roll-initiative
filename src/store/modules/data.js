@@ -37,7 +37,7 @@ const getters = {
     allCombatants: (state) => state.combatants,
     currentFighter(state, iterator) {
         
-
+        //source of current issues, need for figure out how to handle the change of iterator to the overflow state
         if (iterator === (state.combatants.length - 1)) {
             let index = state.combatants.length - 1;
             return state.combatants[index];
