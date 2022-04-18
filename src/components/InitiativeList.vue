@@ -83,7 +83,7 @@ export default {
     nextCombatant() {
       let prevRow;
 
-      if (this.iterator === -1) {
+      if (this.iterator === -1 || this.iterator >= this.allCombatants.length) {
         console.log("poop");
         this.iterate(this.iterator);
       }
@@ -97,7 +97,6 @@ export default {
         let tableRow = document.getElementsByTagName("tr")[this.iterator];
         tableRow.classList.add("highlight");
       }
-      console.log(this.iterator);
       this.iterate(this.iterator);
       if (prevRow) {
         prevRow.classList.remove("highlight");

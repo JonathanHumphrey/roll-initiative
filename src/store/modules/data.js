@@ -38,7 +38,8 @@ const getters = {
     currentFighter(state, iterator) {
         
         //source of current issues, need for figure out how to handle the change of iterator to the overflow state
-        if (iterator === (state.combatants.length - 1)) {
+        console.log(state.iterator)
+        if (iterator === (state.combatants.length)) {
             let index = state.combatants.length - 1;
             return state.combatants[index];
         } else {
@@ -75,7 +76,7 @@ const mutations = {
     iterate(state, iterator) {
         
         
-        if (iterator === state.combatants.length - 1 || iterator === -1) {
+        if (iterator === state.combatants.length + 1 || iterator === -1) {
             
             state.iterator = 0;
         }

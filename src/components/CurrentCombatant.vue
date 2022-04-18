@@ -1,6 +1,10 @@
 <template>
   <div class="fighter-data" v-if="this.iterator !== -1">
     {{ this.currentFighter.name }}
+    <div class="data" v-for="i in this.currentFighter.status" v-bind:key="i">
+      {{ i }}
+      <p>x</p>
+    </div>
   </div>
   <div v-else>
     <p>Combat Not Started</p>
@@ -19,5 +23,12 @@ export default {
   },
 };
 </script>
+
 <style scoped>
+.fighter-data {
+}
+.data {
+  display: flex;
+  flex-direction: column;
+}
 </style>
