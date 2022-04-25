@@ -2,7 +2,8 @@
   <div class="fighter-data" v-if="this.iterator !== -1">
     {{ this.currentFighter.name }}
     <div class="data" v-for="i in this.currentFighter.status" v-bind:key="i">
-      {{ i }}
+      <p>{{ i }}</p>
+
       <p>x</p>
     </div>
   </div>
@@ -26,9 +27,16 @@ export default {
 
 <style scoped>
 .fighter-data {
+  border: solid black;
 }
 .data {
   display: flex;
-  flex-direction: column;
+  border: solid black;
+  flex-direction: row;
+  width: 6rem;
+  margin: auto;
+}
+p {
+  margin-right: 0.25rem;
 }
 </style>
