@@ -15,6 +15,7 @@
             v-for="(tableRow, i) in sortedList"
             v-bind:key="i"
             v-bind:id="`${i + 1}`"
+            @click="popOutWindow(tableRow)"
           >
             <th scope="row" id="index" value="i">{{ ++i }}</th>
             <td id="combatantName">{{ tableRow.name }}</td>
@@ -57,6 +58,9 @@ export default {
   },
   methods: {
     ...mapMutations(["iterate", "addStatus"]),
+    popOutWindow(tableRow) {
+      console.log(tableRow.name);
+    },
     addStatusEffect() {
       console.log(this.currentFighter);
 

@@ -2,12 +2,14 @@
   <AddCombatants />
   <InitiativeList />
   <CurrentCombatant />
+  <DMResources />
 </template>
 
 <script>
 import AddCombatants from "./components/AddCombatants.vue";
 import InitiativeList from "./components/InitiativeList.vue";
 import CurrentCombatant from "./components/CurrentCombatant.vue";
+import DMResources from "./components/DMResources.vue";
 
 export default {
   name: "App",
@@ -15,6 +17,7 @@ export default {
     AddCombatants,
     InitiativeList,
     CurrentCombatant,
+    DMResources,
   },
 };
 </script>
