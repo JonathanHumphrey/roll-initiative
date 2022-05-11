@@ -58,6 +58,16 @@ export default {
   },
   methods: {
     ...mapMutations(["iterate", "addStatus"]),
+
+    /*
+      Prototyping using a modal to add or remove status effects, since they are usually imposed on a PC outside of their turn in initiative order
+
+      Ways to do this: 
+        - Remove this function from this component and put it into its own
+        - keep it here and tie it into the state of the program
+
+        Both of these options imply a slight refactoring of the code that I have not yet planned out on paper... so im gonna get to work on that
+    */
     popOutWindow(tableRow) {
       console.log(tableRow.name);
     },
@@ -71,13 +81,6 @@ export default {
         combatant: this.currentFighter,
       };
       this.addStatus(obj);
-      /* 
-        need to tie the status effect to the specific combatant, not entirely sure how to do this
-
-        needs: append the status effect onto the status array in the combatant object
-
-        also need to render the status effects in a different way, maybe v-for through and make a new div each time it reads a value in the array with a button to delete the object in the array
-      */
     },
     /*
     FUNCTION: nextCombatant()

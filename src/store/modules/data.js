@@ -37,7 +37,6 @@ const getters = {
     allCombatants: (state) => state.combatants,
     currentFighter(state, iterator) {
         
-        //source of current issues, need for figure out how to handle the change of iterator to the overflow state
         console.log(state.iterator)
         if (iterator === (state.combatants.length)) {
             let index = state.combatants.length - 1;
@@ -54,43 +53,22 @@ const actions = {
         console.log(state);
         commit('addCombatant', newCombatant);
     },
-    /* async iterate({ commit }, iterator) {
-        console.log("length", state.combatants.length)
-        if (iterator === state.combatants.length) {
-            
-            iterator = 1;
-        }
-        else {
-            iterator++;
-        }
-        console.log("current",iterator);
-        commit('plusOne', iterator);
-    }, */
-    /* async addStatus({ commit }, obj) {
-        commit('appendStatus', obj);
-    } */
 };
 
 const mutations = {
     addCombatant: (state, newCombatant) => (state.combatants.unshift(newCombatant)),
     iterate(state, iterator) {
-        
-        
-        if (iterator === state.combatants.length + 1 || iterator === -1) {
-            
+        if (iterator === state.combatants.length + 1 || iterator === -1) { 
             state.iterator = 0;
         }
-        else {
-            
+        else { 
             state.iterator++;
-            
         }
         console.log(state.combatants[iterator])
     }, 
+    // TODO: check where this is needed still
     addStatus: (state, obj) => {
-        console.log(obj)
-        
-        
+        console.log(obj) 
     }
 };
 
